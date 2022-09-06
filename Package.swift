@@ -21,8 +21,5 @@ let package = Package(
         .target(
             name: "CITCardsCarousel",
             dependencies: []),
-        .testTarget(
-            name: "CITCardsCarouselTests",
-            dependencies: ["CITCardsCarousel"]),
     ]
 )
