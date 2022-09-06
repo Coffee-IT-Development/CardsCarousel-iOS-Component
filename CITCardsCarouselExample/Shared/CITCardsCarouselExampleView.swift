@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  CITCardsCarouselExampleView.swift
 //
 //  MIT License
 //
