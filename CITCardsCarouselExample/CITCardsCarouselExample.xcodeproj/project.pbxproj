@@ -11,6 +11,7 @@
 		8145A10F28C7815600CAABF2 /* CITCardsCarouselExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8145A0FE28C7815500CAABF2 /* CITCardsCarouselExampleView.swift */; };
 		8145A11128C7815600CAABF2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8145A0FF28C7815600CAABF2 /* Assets.xcassets */; };
 		8145A12028C78CD200CAABF2 /* CITCardsCarousel in Frameworks */ = {isa = PBXBuildFile; productRef = 8145A11F28C78CD200CAABF2 /* CITCardsCarousel */; };
+		8145A12228C7904C00CAABF2 /* CITCardsCarouselExampleColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8145A12128C7904C00CAABF2 /* CITCardsCarouselExampleColors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		8145A0FF28C7815600CAABF2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8145A10428C7815600CAABF2 /* CITCardsCarouselExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CITCardsCarouselExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8145A11B28C781D000CAABF2 /* CITCardsCarousel */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CITCardsCarousel; path = ..; sourceTree = "<group>"; };
+		8145A12128C7904C00CAABF2 /* CITCardsCarouselExampleColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CITCardsCarouselExampleColors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +50,7 @@
 			children = (
 				8145A0FD28C7815500CAABF2 /* CITCardsCarouselExampleApp.swift */,
 				8145A0FE28C7815500CAABF2 /* CITCardsCarouselExampleView.swift */,
+				8145A12128C7904C00CAABF2 /* CITCardsCarouselExampleColors.swift */,
 				8145A0FF28C7815600CAABF2 /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -142,6 +145,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8145A12228C7904C00CAABF2 /* CITCardsCarouselExampleColors.swift in Sources */,
 				8145A10F28C7815600CAABF2 /* CITCardsCarouselExampleView.swift in Sources */,
 				8145A10D28C7815600CAABF2 /* CITCardsCarouselExampleApp.swift in Sources */,
 			);
