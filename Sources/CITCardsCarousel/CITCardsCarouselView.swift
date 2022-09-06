@@ -26,11 +26,15 @@
 
 import SwiftUI
 
-public struct CITCardsCarouselView: View {
+public struct CITCardsCarouselView<SelectionValue, Content> : View where SelectionValue : Hashable, Content : View {
     @Environment(\.presentationMode) var presentationMode
     @State private var currentIndex = 0
     
-    private let tutorialItems = TutorialItemData.all
+    @Binding private var selection: Binding<SelectionValue>?
+    private var config: CITCardsCarouselView.Configuration
+    private var content: () -> Content
+    
+//    private let tutorialItems = TutorialItemData.all
     
     private var isOnFirstPage: Bool {
         currentIndex == 0
@@ -52,7 +56,15 @@ public struct CITCardsCarouselView: View {
         isOnLastPage ? CITLocalizable.tutorialFinishButton : nil
     }
     
-    public init() {}
+    public init(
+        selection: Binding<SelectionValue>? = nil,
+        config: CITCardsCarouselView.Configuration,
+        @ViewBuilder content: @escaping () -> Content
+    ) {
+        self.selection = selection
+        self.config = config
+        self.content = content
+    }
     
     public var body: some View {
         VStack {
