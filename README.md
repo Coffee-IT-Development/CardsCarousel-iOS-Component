@@ -1,5 +1,5 @@
 <!--
-[![Coffee IT - Aroma CITTopTabBar iOS Component](https://coffeeit.nl/wp-content/uploads/2022/07/Aroma_Pincode_iOS.png)](https://coffeeit.nl/)
+[![Coffee IT - Aroma CITCardsCarousel iOS Component](https://coffeeit.nl/wp-content/uploads/2022/07/Aroma_Pincode_iOS.png)](https://coffeeit.nl/)
 -->
 
 [![Swift](https://img.shields.io/badge/Swift-5.6-red?style=flat-square)](https://img.shields.io/badge/Swift-5.6-red?style=flat-square)
@@ -12,7 +12,8 @@
 [![Instagram](https://img.shields.io/badge/Instagram-CoffeeITNL-blue.svg?style=flat-square)](https://www.instagram.com/coffeeitnl/)
 [![Twitter](https://img.shields.io/badge/Twitter-CoffeeITNL-blue.svg?style=flat-square)](https://twitter.com/coffeeitnl)
 
-The CITPermissionCarousel package provides a configurable arrangement of permission views which help explain to the user which permission you'd like to receive and why, in a stylized manner.
+The CITCardsCarousel package provides a configurable arrangement of swipe-able card views which can be used for tutorials and other flows.
+Includes page indicators, skip, previous, next and finish buttons.
 
 ## Installation
 
@@ -20,22 +21,22 @@ The CITPermissionCarousel package provides a configurable arrangement of permiss
 
 To install the Swift Package, go to Project > Package Dependencies > + > Search or Enter Package URL > Fill in:
 ```
-https://github.com/Coffee-IT-Development/PermissionCarousel-iOS-Component
+https://github.com/Coffee-IT-Development/CardsCarousel-iOS-Component
 ```
 
 ## Usage
 
-Import CITPermissionCarousel and add a CITPermissionCarouselView to your SwiftUI view.
+Import CITCardsCarousel and add a CITCardsCarouselView to your SwiftUI view.
 
 ```swift
-import CITPermissionCarousel
+import CITCardsCarousel
 import SwiftUI
 
-struct CITPermissionCarouselExampleView: View {
+struct CITCardsCarouselExampleView: View {
 ...
 
     var body: some View {
-        CITPermissionCarouselView(config: .example)
+        CITCardsCarouselView(config: .example)
     }
 }
 ```
@@ -43,7 +44,7 @@ struct CITPermissionCarouselExampleView: View {
 ## Customization
 
 ```swift
-/// The backgroundColor of the permission carousel view.
+/// The backgroundColor of the cards carousel view.
 public var backgroundColor: Color
 ```
 
@@ -53,8 +54,7 @@ For questions, ideas or help you can reach us by email at contact@coffeeit.nl.
 
 ## Maintainer
 
-Owned by [Coffee IT](https://coffeeit.nl/).
-Actively maintained by Lex Brouwers.
+Owned and actively maintained by [Coffee IT](https://coffeeit.nl/).
 
 ## More
 
