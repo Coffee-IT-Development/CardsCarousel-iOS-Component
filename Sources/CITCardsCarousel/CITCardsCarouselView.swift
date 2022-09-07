@@ -74,23 +74,12 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
             
             HStack(spacing: 0) {
                 content()
+                    .cornerRadius(config.cardCornerRadius)
+                    .padding(config.cardPadding)
                     .frame(width: UIScreen.main.bounds.width)
                     .offset(x: -UIScreen.main.bounds.width * pageBaseOffsetMultiplier + offset)
             }
             .frame(width: UIScreen.main.bounds.width * CGFloat(pageCount))
-//            .offset(x: offset)
-            
-//                GeometryReader { proxy in
-////                    ScrollView(.horizontal) {
-//                    content()
-//                        .cornerRadius(config.cardCornerRadius)
-//                        .padding(config.cardPadding)
-//                        .gesture(DragGesture())
-////                        .frame(width: UIScreen.main.bounds.width, height: proxy.size.height)
-//                        .offset(x: offset)
-////                    }
-//                }
-////            }
             
             navigationButtons
                 .padding(config.navigationButtonsPadding)
