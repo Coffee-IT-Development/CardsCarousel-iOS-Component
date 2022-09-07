@@ -64,7 +64,6 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
     public var body: some View {
         VStack {
 //            TabView(selection: $selection) {
-////                ScrollViewReader { proxy in
 //                content()
 //                    .cornerRadius(config.cardCornerRadius)
 //                    .padding(config.cardPadding)
