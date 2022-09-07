@@ -29,8 +29,23 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var selectedTab = 0
+    @State private var isShowingInSheet = false
+    @State private var isShowingFullscreen = false
     
     var body: some View {
+        VStack {
+            exampleButton("Show cards carousel fullscreen", action: showCardsCarouselFullscreen)
+            exampleButton("Show cards carousel in sheet", action: showCardsCarouselInSheet)
+        }
+        .fullScreenCover(isPresented: $isShowingFullscreen) {
+            cardsCarousel
+        }
+        .sheet(isPresented: $isShowingInSheet) {
+            cardsCarousel
+        }
+    }
+    
+    var cardsCarousel: some View {
         CITCardsCarouselView(selection: $selectedTab, pageCount: 4, config: .coloredExample) {
             card("A").tag(0)
             card("B").tag(1)
@@ -45,13 +60,33 @@ struct ContentView: View {
             Text(name)
         }
     }
+    
+    private func exampleButton(_ text: String, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Text(text)
+                .padding()
+                .foregroundColor(.carouselButtonTextColor)
+                .background(Color.coffeeItColor)
+                .cornerRadius(20)
+        }
+    }
+    
+    private func showCardsCarouselFullscreen() {
+        selectedTab = 0
+        isShowingFullscreen = true
+    }
+    
+    private func showCardsCarouselInSheet() {
+        selectedTab = 0
+        isShowingInSheet = true
+    }
 }
 
 extension CITCardsCarouselConfiguration {
     public static let coloredExample = CITCardsCarouselConfiguration(
         tintColor: .coffeeItColor,
         backgroundColor: .carouselBackgroundColor,
-        primaryButtonTextColor: .carouselButtonTextColor
+        primaryButtonForegroundColor: .carouselButtonTextColor
     )
 }
 

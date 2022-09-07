@@ -42,18 +42,6 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
         selection + 1 == pageCount
     }
     
-    private var leftButtonImage: Image {
-        isOnFirstPage ? .init(systemName: "xmark") : .init(systemName: "arrow.left")
-    }
-    
-    private var rightButtonImage: Image? {
-        isOnLastPage ? nil : .init(systemName: "arrow.right")
-    }
-    
-    private var rightButtonText: String? {
-        isOnLastPage ? "Let's start" : nil
-    }
-    
     public init(
         selection: Binding<Int>,
         pageCount: Int, // As it is fiendishly hard to extract a view count from a ViewBuilder like Apple does, we can request developers to manually provide the amount.
@@ -71,13 +59,12 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
             TabView(selection: $selection) {
                 content()
                     .cornerRadius(config.cardCornerRadius)
-                    .padding(24)
-                    .padding(.bottom, 8)
+                    .padding(config.cardPadding)
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
             
             navigationButtons
-                .padding([.bottom, .horizontal], 24)
+                .padding(config.navigationButtonsPadding)
         }
         .background(config.backgroundColor.ignoresSafeArea())
         .animation(.default)
@@ -86,12 +73,12 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
     private var navigationButtons: some View {
         HStack(spacing: 16) {
             Button(action: tappedLeftButton, label: {
-                leftButtonImage
-                    .frame(width: 20, height: 20)
-                    .foregroundColor(config.tintColor)
-                    .padding(16)
+                leftButtonContent
+                    .frame(width: config.navigationButtonIconSize, height: config.navigationButtonIconSize)
+                    .foregroundColor(config.secondaryButtonForegroundColor)
+                    .padding(config.navigationButtonContentPadding)
             })
-            .background(config.primaryButtonTextColor)
+            .background(config.secondaryButtonBackgroundColor)
             .cornerRadius(config.buttonCornerRadius)
             
             if !isOnLastPage {
@@ -100,27 +87,33 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
             
             Button(action: tappedRightButton, label: {
                 rightButtonContent
-                    .foregroundColor(config.primaryButtonTextColor)
-                    .padding(16)
+                    .foregroundColor(config.primaryButtonForegroundColor)
+                    .padding(config.navigationButtonContentPadding)
             })
             .background(config.tintColor)
             .cornerRadius(config.buttonCornerRadius)
         }
     }
     
+    var leftButtonContent: some View {
+        isOnFirstPage ? config.navigationButtonDismissIcon : config.navigationButtonPreviousIcon
+    }
+    
     @ViewBuilder
     var rightButtonContent: some View {
-        if let image = rightButtonImage {
-            image
+        if isOnLastPage {
+            finishText
+        } else {
+            config.navigationButtonNextIcon
                 .renderingMode(.template)
-                .frame(width: 20, height: 20)
+                .frame(width: config.navigationButtonIconSize, height: config.navigationButtonIconSize)
         }
-        if let text = rightButtonText {
-            Text(text)
-                .font(config.buttonTextFont)
-                .frame(maxWidth: .greatestFiniteMagnitude)
-                .frame(height: nil)
-        }
+    }
+    
+    var finishText: some View {
+        Text(config.navigationButtonFinishText)
+            .font(config.buttonTextFont)
+            .frame(maxWidth: .greatestFiniteMagnitude)
     }
     
     private func tappedLeftButton() {

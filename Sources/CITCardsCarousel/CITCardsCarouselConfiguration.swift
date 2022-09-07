@@ -29,17 +29,53 @@ import SwiftUI
 /// Normally we add Configuration as an extension to the core view, like CITCardsCarouselView+Configuration, however, due to CITCardsCarouselView's generic constraints, that would complicate internal code.
 public struct CITCardsCarouselConfiguration: Equatable {
     
+    /// The padding around the card container. Defaults to `.init(top: 24, leading: 24, bottom: 32, trailing: 24)`.
+    public var cardPadding: EdgeInsets
+    
+    /// The padding around the navigation buttons. Defaults to `.init(top: 0, leading: 24, bottom: 24, trailing: 24)`.
+    public var navigationButtonsPadding: EdgeInsets
+    
+    /// The spacing between the navigation buttons. Defaults to `16`.
+    public var navigationButtonsSpacing: CGFloat
+    
+    
+//                            public var buttonSize: CGSize // Force a certain size?
+    
+    /// The padding around the navigation button content. Defaults to `init(top: 16, leading: 16, bottom: 16, trailing: 16)`.
+    public var navigationButtonContentPadding: EdgeInsets
+    
+    /// The squared size of navigation button icons, i.e. 􀆄, 􀄪 and 􀄫. Defaults to `20`.
+    public var navigationButtonIconSize: CGFloat
+    
+    /// The dismiss icon used in the navigation buttons. Defaults to `􀆄`.
+    public var navigationButtonDismissIcon: Image
+    
+    /// The previous icon used in the navigation buttons. Defaults to `􀄪`.
+    public var navigationButtonPreviousIcon: Image
+    
+    /// The next icon used in the navigation buttons. Defaults to `􀄫`.
+    public var navigationButtonNextIcon: Image
+    
+    /// The finish text used in the right navigation button on the last page. Defaults to `Let's start`.
+    public var navigationButtonFinishText: String
+    
     /// The tint color of all carousel elements if not overidden. Including primary button background color, secondary button text color and indicator color.
     public var tintColor: Color
     
     /// The backgroundColor of the carousel view, i.e. the area arround the card.
     public var backgroundColor: Color
     
-    /// The text color of content within the primary buttons. Defaults to `.white`.
-    public var primaryButtonTextColor: Color
+    /// The text color of content within the primary buttons, i.e. the right navigation button. Defaults to `.white`.
+    public var primaryButtonForegroundColor: Color
     
-    /// The text color of content within the primary buttons. If `nil`, defaults to `tintColor`.
-    public var secondaryButtonTextColor: Color?
+    /// The background color of primary buttons, i.e. the right navigation button. Defaults to `tintColor`.
+    public var primaryButtonBackgroundColor: Color?
+    
+    /// The text color of content within the secondary buttons, i.e. the left navigation button. If `nil`, defaults to `tintColor`.
+    public var secondaryButtonForegroundColor: Color?
+    
+    /// The background color of primary buttons, i.e. the left navigation button. Defaults to `primaryButtonTextColor`, which defaults to `white`.
+    public var secondaryButtonBackgroundColor: Color?
     
     /// The color of active indicators. If `nil`, defaults to `tintColor`.
     public var activeIndicatorColor: Color?
@@ -66,23 +102,45 @@ public struct CITCardsCarouselConfiguration: Equatable {
     public var indicatorSize: CGFloat
     
     public init(
-        tintColor: Color                        = .blue,
-        backgroundColor: Color                  = .gray,
-        primaryButtonTextColor: Color           = .white,
-        secondaryButtonTextColor: Color?        = nil,
-        activeIndicatorColor: Color?            = nil,
-        inactiveIndicatorColor: Color?          = nil,
-        buttonTextFont: Font                    = .system(size: 16),
-        cardCornerRadius: CGFloat               = 24,
-        buttonCornerRadius: CGFloat             = 16,
-        indicatorCornerRadius: CGFloat          = .infinity,
-        indicatorSpacing: CGFloat               = 6,
-        indicatorSize: CGFloat                  = 6
+        cardPadding: EdgeInsets                         = .init(top: 24, leading: 24, bottom: 32, trailing: 24),
+        navigationButtonsPadding: EdgeInsets            = .init(top: 0, leading: 24, bottom: 24, trailing: 24),
+        navigationButtonsSpacing: CGFloat               = 16,
+        navigationButtonContentPadding: EdgeInsets      = .init(top: 16, leading: 16, bottom: 16, trailing: 16),
+        navigationButtonIconSize: CGFloat               = 20,
+        navigationButtonDismissIcon: Image              = .init(systemName: "xmark"),
+        navigationButtonPreviousIcon: Image             = .init(systemName: "arrow.left"),
+        navigationButtonNextIcon: Image                 = .init(systemName: "arrow.right"),
+        navigationButtonFinishText: String              = "Let's start",
+        tintColor: Color                                = .blue,
+        backgroundColor: Color                          = .gray,
+        primaryButtonForegroundColor: Color             = .white,
+        primaryButtonBackgroundColor: Color?            = nil,
+        secondaryButtonForegroundColor: Color?          = nil,
+        secondaryButtonBackgroundColor: Color?          = nil,
+        activeIndicatorColor: Color?                    = nil,
+        inactiveIndicatorColor: Color?                  = nil,
+        buttonTextFont: Font                            = .system(size: 16),
+        cardCornerRadius: CGFloat                       = 24,
+        buttonCornerRadius: CGFloat                     = 16,
+        indicatorCornerRadius: CGFloat                  = .infinity,
+        indicatorSpacing: CGFloat                       = 6,
+        indicatorSize: CGFloat                          = 6
     ) {
+        self.cardPadding = cardPadding
+        self.navigationButtonsPadding = navigationButtonsPadding
+        self.navigationButtonsSpacing = navigationButtonsSpacing
+        self.navigationButtonContentPadding = navigationButtonContentPadding
+        self.navigationButtonIconSize = navigationButtonIconSize
+        self.navigationButtonDismissIcon = navigationButtonDismissIcon
+        self.navigationButtonPreviousIcon = navigationButtonPreviousIcon
+        self.navigationButtonNextIcon = navigationButtonNextIcon
+        self.navigationButtonFinishText = navigationButtonFinishText
         self.tintColor = tintColor
         self.backgroundColor = backgroundColor
-        self.primaryButtonTextColor = primaryButtonTextColor
-        self.secondaryButtonTextColor = secondaryButtonTextColor ?? tintColor
+        self.primaryButtonForegroundColor = primaryButtonForegroundColor
+        self.primaryButtonBackgroundColor = primaryButtonBackgroundColor ?? tintColor
+        self.secondaryButtonForegroundColor = secondaryButtonForegroundColor ?? tintColor
+        self.secondaryButtonBackgroundColor = secondaryButtonBackgroundColor ?? primaryButtonForegroundColor
         self.activeIndicatorColor = activeIndicatorColor ?? tintColor
         self.inactiveIndicatorColor = inactiveIndicatorColor ?? tintColor.opacity(0.5)
         self.buttonTextFont = buttonTextFont
