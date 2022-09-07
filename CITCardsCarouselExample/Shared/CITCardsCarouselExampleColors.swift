@@ -29,7 +29,7 @@ import Foundation
 import SwiftUI
 
 extension UIColor {
-    static let carouselBackgroundColor: UIColor = #colorLiteral(red: 0.937254902, green: 0.9529411765, blue: 0.9725490196, alpha: 1)
+    static let carouselBackgroundColor: UIColor = #colorLiteral(red: 0.9433208704, green: 0.9532698989, blue: 0.9745958447, alpha: 1)
     static let carouselButtonTextColor: UIColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     static let coffeeItColor: UIColor = #colorLiteral(red: 0.3045416772, green: 0.4229111373, blue: 0.8595631719, alpha: 1)
 }

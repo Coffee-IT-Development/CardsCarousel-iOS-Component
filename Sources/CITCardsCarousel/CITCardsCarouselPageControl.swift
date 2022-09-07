@@ -1,5 +1,5 @@
 //
-//  CITCardsCarouselExampleView.swift
+//  CITCardsCarouselPageControl.swift
 //
 //  MIT License
 //
@@ -24,39 +24,35 @@
 //  SOFTWARE.
 //
 
-import CITCardsCarousel
 import SwiftUI
 
-struct ContentView: View {
-    @State private var selectedTab = 0
-    
+struct CITCardsCarouselPageControl: View {
+    let currentPage: Int
+    let numberOfPages: Int
+    let config: CITCardsCarouselConfiguration = .example
+
     var body: some View {
-        CITCardsCarouselView(selection: $selectedTab, pageCount: 4, config: .coloredExample) {
-            card("A").tag(0)
-            card("B").tag(1)
-            card("C").tag(2)
-            card("D").tag(3)
-        }
-    }
-    
-    private func card(_ name: String) -> some View {
-        ZStack {
-            Color.white
-            Text(name)
+        HStack(spacing: config.indicatorSpacing) {
+            Spacer()
+            
+            ForEach(0 ..< numberOfPages, id: \.self) { index in
+                Circle()
+                    .foregroundColor(index <= currentPage ? config.activeIndicatorColor : config.inactiveIndicatorColor)
+                    .frame(width: config.indicatorSize, height: config.indicatorSize)
+            }
+            
+            Spacer()
         }
     }
 }
 
-extension CITCardsCarouselConfiguration {
-    public static let coloredExample = CITCardsCarouselConfiguration(
-        tintColor: .coffeeItColor,
-        backgroundColor: .carouselBackgroundColor,
-        primaryButtonTextColor: .carouselButtonTextColor
-    )
-}
-
-struct ContentView_Previews: PreviewProvider {
+struct CustomPageView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        VStack {
+            CITCardsCarouselPageControl(currentPage: 3, numberOfPages: 10)
+            CITCardsCarouselPageControl(currentPage: 2, numberOfPages: 5)
+            CITCardsCarouselPageControl(currentPage: 1, numberOfPages: 3)
+            CITCardsCarouselPageControl(currentPage: 0, numberOfPages: 5)
+        }
     }
 }

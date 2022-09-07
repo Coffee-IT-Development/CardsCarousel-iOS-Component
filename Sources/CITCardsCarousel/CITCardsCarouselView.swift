@@ -26,90 +26,101 @@
 
 import SwiftUI
 
-public struct CITCardsCarouselView<SelectionValue, Content> : View where SelectionValue : Hashable, Content : View {
+public struct CITCardsCarouselView<Content> : View where Content : View {
     @Environment(\.presentationMode) var presentationMode
-    @State private var currentIndex = 0
     
-    @Binding private var selection: Binding<SelectionValue>?
-    private var config: CITCardsCarouselView.Configuration
+    @Binding private var selection: Int
+    private var pageCount: Int
+    private var config: CITCardsCarouselConfiguration
     private var content: () -> Content
     
-//    private let tutorialItems = TutorialItemData.all
-    
     private var isOnFirstPage: Bool {
-        currentIndex == 0
+        selection == 0
     }
     
     private var isOnLastPage: Bool {
-        currentIndex + 1 == tutorialItems.count
+        selection + 1 == pageCount
     }
     
-    private var leftButtonImage: UIImage {
-        isOnFirstPage ? CITAsset.Images.icClose.image : CITAsset.Images.icBack.image
+    private var leftButtonImage: Image {
+        isOnFirstPage ? .init(systemName: "xmark") : .init(systemName: "arrow.left")
     }
     
-    private var rightButtonImage: UIImage? {
-        isOnLastPage ? nil : CITAsset.Images.icNext.image
+    private var rightButtonImage: Image? {
+        isOnLastPage ? nil : .init(systemName: "arrow.right")
     }
     
     private var rightButtonText: String? {
-        isOnLastPage ? CITLocalizable.tutorialFinishButton : nil
+        isOnLastPage ? "Let's start" : nil
     }
     
     public init(
-        selection: Binding<SelectionValue>? = nil,
-        config: CITCardsCarouselView.Configuration,
+        selection: Binding<Int>,
+        pageCount: Int, // As it is fiendishly hard to extract a view count from a ViewBuilder like Apple does, we can request developers to manually provide the amount.
+        config: CITCardsCarouselConfiguration,
         @ViewBuilder content: @escaping () -> Content
     ) {
-        self.selection = selection
+        self._selection = selection
+        self.pageCount = pageCount
         self.config = config
         self.content = content
     }
     
     public var body: some View {
         VStack {
-            PaginationView(axis: .horizontal, showsIndicators: false) {
-                ForEach(Array(tutorialItems.enumerated()), id: \.offset) { index, tutorialCardItem in
-                    TutorialCard(tutorialCardItem: tutorialCardItem, showLogo: index == 0)
-                        .padding(.horizontal, 24)
-                }
+            TabView(selection: $selection) {
+                content()
+                    .cornerRadius(config.cardCornerRadius)
+                    .padding(24)
+                    .padding(.bottom, 8)
             }
-            .currentPageIndex($currentIndex.animation())
-            .padding(.bottom, UIDevice.deviceSize == .small ? CGFloat(24) : CGFloat(32))
+            .tabViewStyle(.page(indexDisplayMode: .never))
             
-            HStack {
-                Button(action: tappedLeftButton, label: {
-                    Image(uiImage: leftButtonImage)
-                })
-                .buttonStyle(palette: .secondary, layout: .standard)
-                .frame(width: Size.controlHeight)
-                .cornerRadius(CornerRadius.medium)
-                .transition(.opacity)
-                
-                if !isOnLastPage {
-                    CustomPageControl(currentPage: currentIndex, numberOfPages: tutorialItems.count)
-                        .transition(.scale)
-                }
-                
-                Button(action: tappedRightButton, label: {
-                    if let image = rightButtonImage {
-                        Image(uiImage: image)
-                            .renderingMode(.template)
-                    }
-                    if let text = rightButtonText {
-                        Text(text)
-                            .font(.buttonTextLarge)
-                    }
-                })
-                .buttonStyle(palette: .primary, layout: .standard)
-                .frame(maxWidth: isOnLastPage ? .greatestFiniteMagnitude : Size.controlHeight)
-                .cornerRadius(CornerRadius.medium)
-                .animation(.default)
-            }
-            .padding([.bottom, .horizontal], 24)
+            navigationButtons
+                .padding([.bottom, .horizontal], 24)
         }
-        .padding(.top, 24)
-        .background(Color.backgroundPrimary.ignoresSafeArea())
+        .background(config.backgroundColor.ignoresSafeArea())
+        .animation(.default)
+    }
+    
+    private var navigationButtons: some View {
+        HStack(spacing: 16) {
+            Button(action: tappedLeftButton, label: {
+                leftButtonImage
+                    .frame(width: 20, height: 20)
+                    .foregroundColor(config.tintColor)
+                    .padding(16)
+            })
+            .background(config.primaryButtonTextColor)
+            .cornerRadius(config.buttonCornerRadius)
+            
+            if !isOnLastPage {
+                CITCardsCarouselPageControl(currentPage: selection, numberOfPages: pageCount)
+            }
+            
+            Button(action: tappedRightButton, label: {
+                rightButtonContent
+                    .foregroundColor(config.primaryButtonTextColor)
+                    .padding(16)
+            })
+            .background(config.tintColor)
+            .cornerRadius(config.buttonCornerRadius)
+        }
+    }
+    
+    @ViewBuilder
+    var rightButtonContent: some View {
+        if let image = rightButtonImage {
+            image
+                .renderingMode(.template)
+                .frame(width: 20, height: 20)
+        }
+        if let text = rightButtonText {
+            Text(text)
+                .font(config.buttonTextFont)
+                .frame(maxWidth: .greatestFiniteMagnitude)
+                .frame(height: nil)
+        }
     }
     
     private func tappedLeftButton() {
@@ -117,7 +128,7 @@ public struct CITCardsCarouselView<SelectionValue, Content> : View where Selecti
             dismiss()
         } else {
             withAnimation {
-                currentIndex -= 1
+                selection -= 1
             }
         }
     }
@@ -127,7 +138,7 @@ public struct CITCardsCarouselView<SelectionValue, Content> : View where Selecti
             dismiss()
         } else {
             withAnimation {
-                currentIndex += 1
+                selection += 1
             }
         }
     }
@@ -136,9 +147,9 @@ public struct CITCardsCarouselView<SelectionValue, Content> : View where Selecti
         presentationMode.wrappedValue.dismiss()
     }
 }
-
-struct CITCardsCarouselView_Previews: PreviewProvider {
-    static var previews: some View {
-        CITCardsCarouselView()
-    }
-}
+//
+//struct CITCardsCarouselView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CITCardsCarouselView()
+//    }
+//}
