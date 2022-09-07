@@ -50,7 +50,11 @@ struct CITCardsCarouselExampleView: View {
             card("A").tag(0)
             card("B").frame(width: 150).tag(1)
             card("C").tag(2)
-            card("D").tag(3)
+            ZStack {
+                Color.white
+                Button("Hello!", action: { print ("Hello!") })
+            }
+            .tag(3)
             card("E").tag(4)
             card("F").tag(5)
             card("G").tag(6)
@@ -101,8 +105,4 @@ struct CITCardsCarouselExampleView_Previews: PreviewProvider {
 
 
 
-//    ZStack {
-//        Color.white
-//        Button("Hello!", action: { print ("Hello!") })
-//    }
-//    .tag(1)
+    
