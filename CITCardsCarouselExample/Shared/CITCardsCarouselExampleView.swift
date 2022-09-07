@@ -93,9 +93,9 @@ extension CITCardsCarouselConfiguration {
     )
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct CITCardsCarouselExampleView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        CITCardsCarouselExampleView()
     }
 }
 
