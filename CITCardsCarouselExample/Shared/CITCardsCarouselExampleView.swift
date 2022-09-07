@@ -27,7 +27,7 @@
 import CITCardsCarousel
 import SwiftUI
 
-struct ContentView: View {
+struct CITCardsCarouselExampleView: View {
     @State private var selectedTab = 0
     @State private var isShowingInSheet = false
     @State private var isShowingFullscreen = false
@@ -46,14 +46,17 @@ struct ContentView: View {
     }
     
     var cardsCarousel: some View {
-        CITCardsCarouselView(selection: $selectedTab, pageCount: 4, config: .coloredExample) {
+        CITCardsCarouselView(selection: $selectedTab, pageCount: 7, config: .coloredExample) {
             card("A").tag(0)
-            card("B").tag(1)
+            card("B").frame(width: 150).tag(1)
             card("C").tag(2)
             card("D").tag(3)
+            card("E").tag(4)
+            card("F").tag(5)
+            card("G").tag(6)
         }
     }
-    
+
     private func card(_ name: String) -> some View {
         ZStack {
             Color.white
@@ -95,3 +98,11 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
+
+
+//    ZStack {
+//        Color.white
+//        Button("Hello!", action: { print ("Hello!") })
+//    }
+//    .tag(1)

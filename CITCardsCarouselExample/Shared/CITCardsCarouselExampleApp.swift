@@ -30,7 +30,7 @@ import SwiftUI
 struct CITCardsCarouselExampleApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            CITCardsCarouselExampleView()
         }
     }
 }
