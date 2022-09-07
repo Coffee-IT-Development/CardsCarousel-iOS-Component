@@ -95,12 +95,12 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
         }
     }
     
-    var leftButtonContent: some View {
+    private var leftButtonContent: some View {
         isOnFirstPage ? config.navigationButtonDismissIcon : config.navigationButtonPreviousIcon
     }
     
     @ViewBuilder
-    var rightButtonContent: some View {
+    private var rightButtonContent: some View {
         if isOnLastPage {
             finishText
         } else {
@@ -110,7 +110,7 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
         }
     }
     
-    var finishText: some View {
+    private var finishText: some View {
         Text(config.navigationButtonFinishText)
             .font(config.buttonTextFont)
             .frame(maxWidth: .greatestFiniteMagnitude)
