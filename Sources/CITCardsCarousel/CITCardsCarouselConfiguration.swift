@@ -32,12 +32,11 @@ public struct CITCardsCarouselConfiguration: Equatable {
     /// The padding around the card container. Defaults to `.init(top: 24, leading: 24, bottom: 32, trailing: 24)`.
     public var cardPadding: EdgeInsets
     
-    /// The padding around the navigation buttons. Defaults to `.init(top: 0, leading: 24, bottom: 24, trailing: 24)`.
-    public var navigationButtonsPadding: EdgeInsets
+    /// The padding around the bottom controls. Defaults to `.init(top: 0, leading: 24, bottom: 24, trailing: 24)`.
+    public var bottomControlsPadding: EdgeInsets
     
-    /// The spacing between the navigation buttons. Defaults to `16`.
-    public var navigationButtonsSpacing: CGFloat
-    
+    /// The spacing between the bottom controls. Defaults to `16`.
+    public var bottomControlsSpacing: CGFloat
     
     // TODO: Be careful for the distance between font size and icon size when switching next to finish button mode. Should we add an option for a forced height?
 //                            public var buttonSize: CGSize // Force a certain size?
@@ -113,8 +112,8 @@ public struct CITCardsCarouselConfiguration: Equatable {
     
     public init(
         cardPadding: EdgeInsets                         = .init(top: 24, leading: 24, bottom: 32, trailing: 24),
-        navigationButtonsPadding: EdgeInsets            = .init(top: 0, leading: 24, bottom: 24, trailing: 24),
-        navigationButtonsSpacing: CGFloat               = 16,
+        bottomControlsPadding: EdgeInsets               = .init(top: 0, leading: 24, bottom: 24, trailing: 24),
+        bottomControlsSpacing: CGFloat                  = 16,
         navigationButtonContentPadding: EdgeInsets      = .init(top: 16, leading: 16, bottom: 16, trailing: 16),
         navigationButtonIconSize: CGFloat               = 20,
         navigationButtonDismissIcon: Image              = .init(systemName: "xmark"),
@@ -140,8 +139,8 @@ public struct CITCardsCarouselConfiguration: Equatable {
         indicatorSize: CGFloat                          = 6
     ) {
         self.cardPadding = cardPadding
-        self.navigationButtonsPadding = navigationButtonsPadding
-        self.navigationButtonsSpacing = navigationButtonsSpacing
+        self.bottomControlsPadding = bottomControlsPadding
+        self.bottomControlsSpacing = bottomControlsSpacing
         self.navigationButtonContentPadding = navigationButtonContentPadding
         self.navigationButtonIconSize = navigationButtonIconSize
         self.navigationButtonDismissIcon = navigationButtonDismissIcon

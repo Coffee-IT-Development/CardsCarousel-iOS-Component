@@ -71,8 +71,8 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
             }
             
             if config.showNavigationButtons || config.showIndicators {
-                navigationButtons
-                    .padding(config.navigationButtonsPadding)
+                bottomControls
+                    .padding(config.bottomControlsPadding)
             }
         }
         .background(config.backgroundColor.ignoresSafeArea())
@@ -99,8 +99,8 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
         .frame(width: UIScreen.main.bounds.width * CGFloat(pageCount))
     }
     
-    private var navigationButtons: some View {
-        HStack(spacing: 16) {
+    private var bottomControls: some View {
+        HStack(spacing: config.bottomControlsSpacing) {
             if config.showNavigationButtons {
                 Button(action: tappedLeftButton, label: {
                     leftButtonContent
@@ -175,6 +175,8 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
         presentationMode.wrappedValue.dismiss()
     }
 }
+
+// TODO: Add good preview for Cards Carousel
 //
 //struct CITCardsCarouselView_Previews: PreviewProvider {
 //    static var previews: some View {
