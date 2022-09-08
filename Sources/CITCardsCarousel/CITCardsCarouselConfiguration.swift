@@ -60,6 +60,12 @@ public struct CITCardsCarouselConfiguration: Equatable {
     /// The finish text used in the right navigation button on the last page. Defaults to `Let's start`.
     public var navigationButtonFinishText: String
     
+    /// If `true`, shows navigation buttons at the bottom of the cards carousel. If `false`, hides the navigation buttons.
+    public var showNavigationButtons: Bool
+    
+    /// If `true`, shows indicators at the bottom of the cards carousel. If `false`, hides the indicators.
+    public var showIndicators: Bool
+    
     /// If `true`, will allow the user to swipe the cards left and right, if `false`, prevents any swipe interaction.
     public var cardsSwipingEnabled: Bool
     
@@ -115,6 +121,8 @@ public struct CITCardsCarouselConfiguration: Equatable {
         navigationButtonPreviousIcon: Image             = .init(systemName: "arrow.left"),
         navigationButtonNextIcon: Image                 = .init(systemName: "arrow.right"),
         navigationButtonFinishText: String              = "Let's start",
+        showNavigationButtons: Bool                     = true,
+        showIndicators: Bool                            = true,
         cardsSwipingEnabled: Bool                       = true,
         tintColor: Color                                = .blue,
         backgroundColor: Color                          = .gray,
@@ -140,6 +148,8 @@ public struct CITCardsCarouselConfiguration: Equatable {
         self.navigationButtonPreviousIcon = navigationButtonPreviousIcon
         self.navigationButtonNextIcon = navigationButtonNextIcon
         self.navigationButtonFinishText = navigationButtonFinishText
+        self.showNavigationButtons = showNavigationButtons
+        self.showIndicators = showIndicators
         self.cardsSwipingEnabled = cardsSwipingEnabled
         self.tintColor = tintColor
         self.backgroundColor = backgroundColor

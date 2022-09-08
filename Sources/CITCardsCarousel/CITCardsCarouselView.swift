@@ -70,8 +70,10 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
                 nonSwipeableCards
             }
             
-            navigationButtons
-                .padding(config.navigationButtonsPadding)
+            if config.showNavigationButtons || config.showIndicators {
+                navigationButtons
+                    .padding(config.navigationButtonsPadding)
+            }
         }
         .background(config.backgroundColor.ignoresSafeArea())
         .animation(.default)
@@ -99,26 +101,30 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
     
     private var navigationButtons: some View {
         HStack(spacing: 16) {
-            Button(action: tappedLeftButton, label: {
-                leftButtonContent
-                    .frame(width: config.navigationButtonIconSize, height: config.navigationButtonIconSize)
-                    .foregroundColor(config.secondaryButtonForegroundColor)
-                    .padding(config.navigationButtonContentPadding)
-            })
-            .background(config.secondaryButtonBackgroundColor)
-            .cornerRadius(config.buttonCornerRadius)
+            if config.showNavigationButtons {
+                Button(action: tappedLeftButton, label: {
+                    leftButtonContent
+                        .frame(width: config.navigationButtonIconSize, height: config.navigationButtonIconSize)
+                        .foregroundColor(config.secondaryButtonForegroundColor)
+                        .padding(config.navigationButtonContentPadding)
+                })
+                .background(config.secondaryButtonBackgroundColor)
+                .cornerRadius(config.buttonCornerRadius)
+            }
             
-            if !isOnLastPage {
+            if !isOnLastPage || !config.showNavigationButtons {
                 CITCardsCarouselPageControl(currentPage: selection, numberOfPages: pageCount)
             }
             
-            Button(action: tappedRightButton, label: {
-                rightButtonContent
-                    .foregroundColor(config.primaryButtonForegroundColor)
-                    .padding(config.navigationButtonContentPadding)
-            })
-            .background(config.tintColor)
-            .cornerRadius(config.buttonCornerRadius)
+            if config.showNavigationButtons {
+                Button(action: tappedRightButton, label: {
+                    rightButtonContent
+                        .foregroundColor(config.primaryButtonForegroundColor)
+                        .padding(config.navigationButtonContentPadding)
+                })
+                .background(config.tintColor)
+                .cornerRadius(config.buttonCornerRadius)
+            }
         }
     }
     
