@@ -39,6 +39,7 @@ public struct CITCardsCarouselConfiguration: Equatable {
     public var navigationButtonsSpacing: CGFloat
     
     
+    // TODO: Be careful for the distance between font size and icon size when switching next to finish button mode. Should we add an option for a forced height?
 //                            public var buttonSize: CGSize // Force a certain size?
     
     /// The padding around the navigation button content. Defaults to `init(top: 16, leading: 16, bottom: 16, trailing: 16)`.
@@ -58,6 +59,9 @@ public struct CITCardsCarouselConfiguration: Equatable {
     
     /// The finish text used in the right navigation button on the last page. Defaults to `Let's start`.
     public var navigationButtonFinishText: String
+    
+    /// If `true`, will allow the user to swipe the cards left and right, if `false`, prevents any swipe interaction.
+    public var cardsSwipingEnabled: Bool
     
     /// The tint color of all carousel elements if not overidden. Including primary button background color, secondary button text color and indicator color.
     public var tintColor: Color
@@ -111,6 +115,7 @@ public struct CITCardsCarouselConfiguration: Equatable {
         navigationButtonPreviousIcon: Image             = .init(systemName: "arrow.left"),
         navigationButtonNextIcon: Image                 = .init(systemName: "arrow.right"),
         navigationButtonFinishText: String              = "Let's start",
+        cardsSwipingEnabled: Bool                       = true,
         tintColor: Color                                = .blue,
         backgroundColor: Color                          = .gray,
         primaryButtonForegroundColor: Color             = .white,
@@ -135,6 +140,7 @@ public struct CITCardsCarouselConfiguration: Equatable {
         self.navigationButtonPreviousIcon = navigationButtonPreviousIcon
         self.navigationButtonNextIcon = navigationButtonNextIcon
         self.navigationButtonFinishText = navigationButtonFinishText
+        self.cardsSwipingEnabled = cardsSwipingEnabled
         self.tintColor = tintColor
         self.backgroundColor = backgroundColor
         self.primaryButtonForegroundColor = primaryButtonForegroundColor

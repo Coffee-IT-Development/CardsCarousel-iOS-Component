@@ -34,6 +34,7 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
     private var config: CITCardsCarouselConfiguration
     private var content: () -> Content
     
+    /// TODO: Update offset if selection binding changes instead of only on button press.
     @State private var offset: CGFloat
     
     private var isOnFirstPage: Bool {
@@ -63,28 +64,37 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
     
     public var body: some View {
         VStack {
-//            TabView(selection: $selection) {
-//                content()
-//                    .cornerRadius(config.cardCornerRadius)
-//                    .padding(config.cardPadding)
-//            }
-//            .tabViewStyle(.page(indexDisplayMode: .never))
-
-            
-            HStack(spacing: 0) {
-                content()
-                    .cornerRadius(config.cardCornerRadius)
-                    .padding(config.cardPadding)
-                    .frame(width: UIScreen.main.bounds.width)
-                    .offset(x: -UIScreen.main.bounds.width * pageBaseOffsetMultiplier + offset)
+            if config.cardsSwipingEnabled {
+                swipeableCards
+            } else {
+                nonSwipeableCards
             }
-            .frame(width: UIScreen.main.bounds.width * CGFloat(pageCount))
             
             navigationButtons
                 .padding(config.navigationButtonsPadding)
         }
         .background(config.backgroundColor.ignoresSafeArea())
         .animation(.default)
+    }
+    
+    private var swipeableCards: some View {
+        TabView(selection: $selection) {
+            content()
+                .cornerRadius(config.cardCornerRadius)
+                .padding(config.cardPadding)
+        }
+        .tabViewStyle(.page(indexDisplayMode: .never))
+    }
+    
+    private var nonSwipeableCards: some View {
+        HStack(spacing: 0) {
+            content()
+                .cornerRadius(config.cardCornerRadius)
+                .padding(config.cardPadding)
+                .frame(width: UIScreen.main.bounds.width)
+                .offset(x: -UIScreen.main.bounds.width * pageBaseOffsetMultiplier + offset)
+        }
+        .frame(width: UIScreen.main.bounds.width * CGFloat(pageCount))
     }
     
     private var navigationButtons: some View {
