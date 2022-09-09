@@ -44,8 +44,83 @@ struct CITCardsCarouselExampleView: View {
 ## Customization
 
 ```swift
-/// The backgroundColor of the cards carousel view.
+/// The padding around the card container. Defaults to `.init(top: 24, leading: 24, bottom: 32, trailing: 24)`.
+public var cardPadding: EdgeInsets
+
+/// The padding around the bottom controls. Defaults to `.init(top: 0, leading: 24, bottom: 24, trailing: 24)`.
+public var bottomControlsPadding: EdgeInsets
+
+/// The spacing between the bottom controls. Defaults to `16`.
+public var bottomControlsSpacing: CGFloat
+
+/// The padding around the navigation button content. Defaults to `init(top: 16, leading: 16, bottom: 16, trailing: 16)`.
+public var navigationButtonContentPadding: EdgeInsets
+
+/// The squared size of navigation button icons, i.e. 􀆄, 􀄪 and 􀄫. Defaults to `20`.
+public var navigationButtonIconSize: CGFloat
+
+/// The dismiss icon used in the navigation buttons. Defaults to `􀆄`.
+public var navigationButtonDismissIcon: Image
+
+/// The previous icon used in the navigation buttons. Defaults to `􀄪`.
+public var navigationButtonPreviousIcon: Image
+
+/// The next icon used in the navigation buttons. Defaults to `􀄫`.
+public var navigationButtonNextIcon: Image
+
+/// The finish text used in the right navigation button on the last page. Defaults to `Let's start`.
+public var navigationButtonFinishText: String
+
+/// If `true`, shows navigation buttons at the bottom of the cards carousel. If `false`, hides the navigation buttons.
+public var showNavigationButtons: Bool
+
+/// If `true`, shows indicators at the bottom of the cards carousel. If `false`, hides the indicators.
+public var showIndicators: Bool
+
+/// If `true`, will allow the user to swipe the cards left and right, if `false`, prevents any swipe interaction.
+public var cardsSwipingEnabled: Bool
+
+/// The tint color of all carousel elements if not overidden. Including primary button background color, secondary button text color and indicator color.
+public var tintColor: Color
+
+/// The backgroundColor of the carousel view, i.e. the area arround the card.
 public var backgroundColor: Color
+
+/// The text color of content within the primary buttons, i.e. the right navigation button. Defaults to `.white`.
+public var primaryButtonForegroundColor: Color
+
+/// The background color of primary buttons, i.e. the right navigation button. Defaults to `tintColor`.
+public var primaryButtonBackgroundColor: Color?
+
+/// The text color of content within the secondary buttons, i.e. the left navigation button. If `nil`, defaults to `tintColor`.
+public var secondaryButtonForegroundColor: Color?
+
+/// The background color of primary buttons, i.e. the left navigation button. Defaults to `primaryButtonTextColor`, which defaults to `white`.
+public var secondaryButtonBackgroundColor: Color?
+
+/// The color of active indicators. If `nil`, defaults to `tintColor`.
+public var activeIndicatorColor: Color?
+
+/// The color of inactive indicators. If `nil`, defaults to `tintColor` with `0.5 opacity`.
+public var inactiveIndicatorColor: Color?
+
+/// The font used for all button texts, i.e. the skip and continue button below the center card.
+public var buttonTextFont: Font
+
+/// The corner radius of the card. Defaults to `24`.
+public var cardCornerRadius: CGFloat
+
+/// The corner radius of the buttons. Defaults to `16`.
+public var buttonCornerRadius: CGFloat
+
+/// The corner radius of the indicators. Defaults to `.infinity` to make them round.
+public var indicatorCornerRadius: CGFloat
+
+/// The spacing between indicators. Defaults to `6`.
+public var indicatorSpacing: CGFloat
+
+/// The size of each indicator, determines both width and height of circle. Defaults to `6`.
+public var indicatorSize: CGFloat
 ```
 
 ## Contact
