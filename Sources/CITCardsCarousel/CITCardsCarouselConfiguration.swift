@@ -38,7 +38,7 @@ public struct CITCardsCarouselConfiguration: Equatable {
     /// The spacing between the bottom controls. Defaults to `16`.
     public var bottomControlsSpacing: CGFloat
     
-    // TODO: Be careful for the distance between font size and icon size when switching next to finish button mode. Should we add an option for a forced height?
+    // TODO: AR-157: Be careful for the distance between font size and icon size when switching next to finish button mode. Should we add an option for a forced height?
 //                            public var buttonSize: CGSize // Force a certain size?
     
     /// The padding around the navigation button content. Defaults to `init(top: 16, leading: 16, bottom: 16, trailing: 16)`.
