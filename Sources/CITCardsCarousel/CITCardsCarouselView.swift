@@ -34,7 +34,7 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
     private var config: CITCardsCarouselConfiguration
     private var content: () -> Content
     
-    // TODO: Update offset if selection binding changes instead of only on button press.
+    // FIXME: AR-149: (Resolve in open source ticket) Update offset if selection binding changes instead of only on button press.
     @State private var offset: CGFloat
     
     private var isOnFirstPage: Bool {
