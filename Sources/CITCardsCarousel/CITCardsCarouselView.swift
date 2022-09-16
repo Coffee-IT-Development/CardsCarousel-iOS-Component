@@ -90,6 +90,7 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
         .tabViewStyle(.page(indexDisplayMode: .never))
     }
     
+    // TODO: Resolve UIScreen.main.bounds.width usage to be compatible with smaller sizes if desired.
     private var nonSwipeableCards: some View {
         HStack(spacing: 0) {
             content()
