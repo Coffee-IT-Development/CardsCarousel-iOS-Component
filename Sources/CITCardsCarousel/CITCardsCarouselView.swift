@@ -105,12 +105,12 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
     private var bottomControls: some View {
         HStack(spacing: config.bottomControlsSpacing) {
             if config.showNavigationButtons {
-                Button(action: tappedLeftButton, label: {
+                Button(action: tappedLeftButton) {
                     leftButtonContent
                         .frame(width: config.navigationButtonIconSize, height: config.navigationButtonIconSize)
                         .foregroundColor(config.secondaryButtonForegroundColor)
                         .padding(config.navigationButtonContentPadding)
-                })
+                }
                 .background(config.secondaryButtonBackgroundColor)
                 .cornerRadius(config.buttonCornerRadius)
             }
@@ -120,11 +120,11 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
             }
             
             if config.showNavigationButtons {
-                Button(action: tappedRightButton, label: {
+                Button(action: tappedRightButton) {
                     rightButtonContent
                         .foregroundColor(config.primaryButtonForegroundColor)
                         .padding(config.navigationButtonContentPadding)
-                })
+                }
                 .background(config.tintColor)
                 .cornerRadius(config.buttonCornerRadius)
             }
