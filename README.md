@@ -1,92 +1,140 @@
-# CITCardsCarousel
+<!--
+[![Coffee IT - Aroma CITCardsCarousel iOS Component](https://coffeeit.nl/wp-content/uploads/2022/07/Aroma_Pincode_iOS.png)](https://coffeeit.nl/)
+-->
 
+[![Swift](https://img.shields.io/badge/Swift-5.6-red?style=flat-square)](https://img.shields.io/badge/Swift-5.6-red?style=flat-square)
+[![iOS 14+](https://img.shields.io/badge/iOS-v14+-pink?style=flat-square)](https://img.shields.io/badge/iOS-v14+-pink?style=flat-square)
+[![Mirror Repository](https://img.shields.io/badge/Mirror-Repository-pink?style=flat-square)](https://img.shields.io/badge/Mirror-Repository-pink?style=flat-square)
+[![License](https://img.shields.io/badge/License-MIT-pink.svg?style=flat-square)](LICENSE.md)
+[![Swift Package Manager](https://img.shields.io/badge/Swift_Package_Manager-Compatible-red?style=flat-square)](https://img.shields.io/badge/Swift_Package_Manager-Compatible-red?style=flat-square)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-@CoffeeIT-blue.svg?style=flat-square)](https://linkedin.com/company/coffee-it)
+[![Facebook](https://img.shields.io/badge/Facebook-CoffeeITNL-blue.svg?style=flat-square)](https://www.facebook.com/CoffeeITNL/)
+[![Instagram](https://img.shields.io/badge/Instagram-CoffeeITNL-blue.svg?style=flat-square)](https://www.instagram.com/coffeeitnl/)
+[![Twitter](https://img.shields.io/badge/Twitter-CoffeeITNL-blue.svg?style=flat-square)](https://twitter.com/coffeeitnl)
 
-
-## Getting started
-
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
-
-```
-cd existing_repo
-git remote add origin https://gitlab.com/CoffeeIT/ios/swift-packages/CITCardsCarousel.git
-git branch -M main
-git push -uf origin main
-```
-
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://gitlab.com/CoffeeIT/ios/swift-packages/CITCardsCarousel/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+The CITCardsCarousel package provides a configurable arrangement of swipe-able card views which can be used for tutorials and other flows.
+Includes page indicators, skip, previous, next and finish buttons.
 
 ## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+
+### SwiftPM
+
+To install the Swift Package, go to Project > Package Dependencies > + > Search or Enter Package URL > Fill in:
+```
+https://github.com/Coffee-IT-Development/CardsCarousel-iOS-Component
+```
 
 ## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+Import CITCardsCarousel and add a CITCardsCarouselView to your SwiftUI view.
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+```swift
+import CITCardsCarousel
+import SwiftUI
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+struct CITCardsCarouselExampleView: View {
+...
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+    var body: some View {
+        CITCardsCarouselView(config: .example)
+    }
+}
+```
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+## Customization
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+```swift
+/// The padding around the card container. Defaults to `.init(top: 24, leading: 24, bottom: 32, trailing: 24)`.
+public var cardPadding: EdgeInsets
+
+/// The padding around the bottom controls. Defaults to `.init(top: 0, leading: 24, bottom: 24, trailing: 24)`.
+public var bottomControlsPadding: EdgeInsets
+
+/// The spacing between the bottom controls. Defaults to `16`.
+public var bottomControlsSpacing: CGFloat
+
+/// The padding around the navigation button content. Defaults to `init(top: 16, leading: 16, bottom: 16, trailing: 16)`.
+public var navigationButtonContentPadding: EdgeInsets
+
+/// The squared size of navigation button icons, i.e. 􀆄, 􀄪 and 􀄫. Defaults to `20`.
+public var navigationButtonIconSize: CGFloat
+
+/// The dismiss icon used in the navigation buttons. Defaults to `􀆄`.
+public var navigationButtonDismissIcon: Image
+
+/// The previous icon used in the navigation buttons. Defaults to `􀄪`.
+public var navigationButtonPreviousIcon: Image
+
+/// The next icon used in the navigation buttons. Defaults to `􀄫`.
+public var navigationButtonNextIcon: Image
+
+/// The finish text used in the right navigation button on the last page. Defaults to `Let's start`.
+public var navigationButtonFinishText: String
+
+/// If `true`, shows navigation buttons at the bottom of the cards carousel. If `false`, hides the navigation buttons.
+public var showNavigationButtons: Bool
+
+/// If `true`, shows indicators at the bottom of the cards carousel. If `false`, hides the indicators.
+public var showIndicators: Bool
+
+/// If `true`, will allow the user to swipe the cards left and right, if `false`, prevents any swipe interaction.
+public var cardsSwipingEnabled: Bool
+
+/// The tint color of all carousel elements if not overidden. Including primary button background color, secondary button text color and indicator color.
+public var tintColor: Color
+
+/// The backgroundColor of the carousel view, i.e. the area arround the card.
+public var backgroundColor: Color
+
+/// The text color of content within the primary buttons, i.e. the right navigation button. Defaults to `.white`.
+public var primaryButtonForegroundColor: Color
+
+/// The background color of primary buttons, i.e. the right navigation button. Defaults to `tintColor`.
+public var primaryButtonBackgroundColor: Color?
+
+/// The text color of content within the secondary buttons, i.e. the left navigation button. If `nil`, defaults to `tintColor`.
+public var secondaryButtonForegroundColor: Color?
+
+/// The background color of primary buttons, i.e. the left navigation button. Defaults to `primaryButtonTextColor`, which defaults to `white`.
+public var secondaryButtonBackgroundColor: Color?
+
+/// The color of active indicators. If `nil`, defaults to `tintColor`.
+public var activeIndicatorColor: Color?
+
+/// The color of inactive indicators. If `nil`, defaults to `tintColor` with `0.5 opacity`.
+public var inactiveIndicatorColor: Color?
+
+/// The font used for all button texts, i.e. the skip and continue button below the center card.
+public var buttonTextFont: Font
+
+/// The corner radius of the card. Defaults to `24`.
+public var cardCornerRadius: CGFloat
+
+/// The corner radius of the buttons. Defaults to `16`.
+public var buttonCornerRadius: CGFloat
+
+/// The corner radius of the indicators. Defaults to `.infinity` to make them round.
+public var indicatorCornerRadius: CGFloat
+
+/// The spacing between indicators. Defaults to `6`.
+public var indicatorSpacing: CGFloat
+
+/// The size of each indicator, determines both width and height of circle. Defaults to `6`.
+public var indicatorSize: CGFloat
+```
+
+## Contact
+
+For questions, ideas or help you can reach us by email at contact@coffeeit.nl.
+
+## Maintainer
+
+Owned and actively maintained by [Coffee IT](https://coffeeit.nl/).
+
+## More
+
+Look at our other repositories on our [GitHub account](https://github.com/orgs/Coffee-IT-Development/repositories).
 
 ## License
-For open source projects, say how it is licensed.
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+Distributed under the MIT License. [See LICENSE](LICENSE.md) for more information.
