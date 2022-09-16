@@ -127,6 +127,11 @@ public var indicatorSize: CGFloat
 
 For questions, ideas or help you can reach us by email at contact@coffeeit.nl.
 
+## ✏️ Changelog
+
+All notable changes to this project will be documented in the [Changelog](CHANGELOG.md).
+`CITCardsCarousel` adheres to [Semantic Versioning](https://semver.org/).
+
 ## Maintainer
 
 Owned and actively maintained by [Coffee IT](https://coffeeit.nl/).
