@@ -102,7 +102,3 @@ struct CITCardsCarouselExampleView_Previews: PreviewProvider {
         CITCardsCarouselExampleView()
     }
 }
-
-
-
-    
