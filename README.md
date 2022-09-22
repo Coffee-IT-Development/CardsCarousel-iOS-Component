@@ -112,16 +112,16 @@ public var navigationButtonHeight: CGFloat?
 /// The padding around the navigation button content. Defaults to `init(top: 16, leading: 16, bottom: 16, trailing: 16)`.
 public var navigationButtonContentPadding: EdgeInsets
 
-/// The squared size of navigation button icons, i.e. 􀆄, 􀄪 and 􀄫. Defaults to `20`.
+/// The squared size of navigation button icons, i.e. `xmark`, `arrow.left` and `arrow.right`. Defaults to `20`.
 public var navigationButtonIconSize: CGFloat
 
-/// The dismiss icon used in the navigation buttons. Defaults to `􀆄`.
+/// The dismiss icon used in the navigation buttons. Defaults to `xmark`.
 public var navigationButtonDismissIcon: Image
 
-/// The previous icon used in the navigation buttons. Defaults to `􀄪`.
+/// The previous icon used in the navigation buttons. Defaults to `arrow.left`.
 public var navigationButtonPreviousIcon: Image
 
-/// The next icon used in the navigation buttons. Defaults to `􀄫`.
+/// The next icon used in the navigation buttons. Defaults to `arrow.right`.
 public var navigationButtonNextIcon: Image
 
 /// The finish text used in the right navigation button on the last page. Defaults to `Let's start`.
