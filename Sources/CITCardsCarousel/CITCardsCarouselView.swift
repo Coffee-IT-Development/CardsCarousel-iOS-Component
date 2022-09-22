@@ -34,8 +34,8 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
     private var config: CITCardsCarouselConfiguration
     private var content: () -> Content
     
-    // FIXME: AR-149: (Resolve in open source ticket) Update offset if selection binding changes instead of only on button press.
-    @State private var offset: CGFloat
+    @State private var viewSize: CGSize = .zero
+    @State private var nilBeforeDidAppear: Animation? = nil
     
     private var isOnFirstPage: Bool {
         selection == 0
@@ -61,7 +61,6 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
         self.pageCount = pageCount
         self.config = config
         self.content = content
-        self._offset = State(initialValue: CGFloat(pageCount - 1) * UIScreen.main.bounds.width)
     }
     
     public var body: some View {
@@ -75,10 +74,22 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
             if config.showNavigationButtons || config.showIndicators {
                 bottomControls
                     .padding(config.bottomControlsPadding)
+                    .background(GeometryReader { proxy in
+                        Color.clear
+                            .onAppear {
+                                self.viewSize = proxy.size
+                                DispatchQueue.main.async {
+                                    self.nilBeforeDidAppear = .default
+                                }
+                            }
+                            .onChange(of: proxy.size) { newValue in
+                                self.viewSize = newValue
+                            }
+                    })
             }
         }
         .background(config.backgroundColor.ignoresSafeArea())
-        .animation(.default)
+        .animation(nilBeforeDidAppear)
     }
     
     private var swipeableCards: some View {
@@ -90,16 +101,15 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
         .tabViewStyle(.page(indexDisplayMode: .never))
     }
     
-    // TODO: Resolve UIScreen.main.bounds.width usage to be compatible with smaller sizes if desired.
     private var nonSwipeableCards: some View {
         HStack(spacing: 0) {
             content()
                 .cornerRadius(config.cardCornerRadius)
                 .padding(config.cardPadding)
-                .frame(width: UIScreen.main.bounds.width)
-                .offset(x: -UIScreen.main.bounds.width * pageBaseOffsetMultiplier + offset)
+                .frame(width: viewSize.width)
+                .offset(x: viewSize.width * pageBaseOffsetMultiplier - CGFloat(selection) * viewSize.width)
         }
-        .frame(width: UIScreen.main.bounds.width * CGFloat(pageCount))
+        .frame(width: viewSize.width * CGFloat(pageCount))
     }
     
     private var bottomControls: some View {
@@ -157,7 +167,6 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
             dismiss()
         } else {
             withAnimation {
-                offset += UIScreen.main.bounds.width
                 selection -= 1
             }
         }
@@ -168,7 +177,6 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
             dismiss()
         } else {
             withAnimation {
-                offset -= UIScreen.main.bounds.width
                 selection += 1
             }
         }
