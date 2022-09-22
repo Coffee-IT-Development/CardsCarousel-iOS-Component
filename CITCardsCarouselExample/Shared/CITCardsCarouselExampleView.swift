@@ -46,18 +46,13 @@ struct CITCardsCarouselExampleView: View {
     }
     
     var cardsCarousel: some View {
-        CITCardsCarouselView(selection: $selectedTab, pageCount: 7, config: .coloredExample) {
+        CITCardsCarouselView(selection: $selectedTab, pageCount: 6, config: .coloredExample) {
             card("A").tag(0)
-            card("B").frame(width: 150).tag(1)
+            card("B").tag(1)
             card("C").tag(2)
-            ZStack {
-                Color.white
-                Button("Hello!", action: { print ("Hello!") })
-            }
-            .tag(3)
+            card("D").tag(3)
             card("E").tag(4)
             card("F").tag(5)
-            card("G").tag(6)
         }
     }
 

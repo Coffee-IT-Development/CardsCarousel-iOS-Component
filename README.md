@@ -27,16 +27,66 @@ https://github.com/Coffee-IT-Development/CardsCarousel-iOS-Component
 ## Usage
 
 Import CITCardsCarousel and add a CITCardsCarouselView to your SwiftUI view.
+The following example showcases how you could use the cards carousel in a sheet or fullScreenCover.
 
 ```swift
 import CITCardsCarousel
 import SwiftUI
 
 struct CITCardsCarouselExampleView: View {
-...
-
+    @State private var selectedTab = 0
+    @State private var isShowingInSheet = false
+    @State private var isShowingFullscreen = false
+    
     var body: some View {
-        CITCardsCarouselView(config: .example)
+        VStack {
+            exampleButton("Show cards carousel fullscreen", action: showCardsCarouselFullscreen)
+            exampleButton("Show cards carousel in sheet", action: showCardsCarouselInSheet)
+        }
+        .fullScreenCover(isPresented: $isShowingFullscreen) {
+            cardsCarousel
+        }
+        .sheet(isPresented: $isShowingInSheet) {
+            cardsCarousel
+        }
+    }
+    
+    var cardsCarousel: some View {
+        CITCardsCarouselView(selection: $selectedTab, pageCount: 6, config: .coloredExample) {
+            card("A").tag(0)
+            card("B").tag(1)
+            card("C").tag(2)
+            card("D").tag(3)
+            card("E").tag(4)
+            card("F").tag(5)
+        }
+    }
+
+    private func card(_ name: String) -> some View {
+        ZStack {
+            Color.white
+            Text(name)
+        }
+    }
+    
+    private func exampleButton(_ text: String, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Text(text)
+                .padding()
+                .foregroundColor(.carouselButtonTextColor)
+                .background(Color.coffeeItColor)
+                .cornerRadius(20)
+        }
+    }
+    
+    private func showCardsCarouselFullscreen() {
+        selectedTab = 0
+        isShowingFullscreen = true
+    }
+    
+    private func showCardsCarouselInSheet() {
+        selectedTab = 0
+        isShowingInSheet = true
     }
 }
 ```
@@ -47,11 +97,17 @@ struct CITCardsCarouselExampleView: View {
 /// The padding around the card container. Defaults to `.init(top: 24, leading: 24, bottom: 32, trailing: 24)`.
 public var cardPadding: EdgeInsets
 
+/// The safe area edges that a card ignores. Can be set to `.top` to allow a card to affect status bar area (i.e. let an image or color reach the top of the screen). Defaults to `nil`.
+public var cardIgnoreSafeAreaEdges: Edge.Set?
+
 /// The padding around the bottom controls. Defaults to `.init(top: 0, leading: 24, bottom: 24, trailing: 24)`.
 public var bottomControlsPadding: EdgeInsets
 
 /// The spacing between the bottom controls. Defaults to `16`.
 public var bottomControlsSpacing: CGFloat
+
+/// The height of the navigation buttons. May be used to negate visual glitches if navigation button font size and icon size differ too much, if `nil`, defaults to intrinsic content size.
+public var navigationButtonHeight: CGFloat?
 
 /// The padding around the navigation button content. Defaults to `init(top: 16, leading: 16, bottom: 16, trailing: 16)`.
 public var navigationButtonContentPadding: EdgeInsets
