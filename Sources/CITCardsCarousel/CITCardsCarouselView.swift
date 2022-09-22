@@ -26,6 +26,8 @@
 
 import SwiftUI
 
+/// The CITCardsCarousel package provides a configurable arrangement of swipe-able card views which can be used for tutorials and other flows.
+/// Includes page indicators, skip, previous, next and finish buttons.
 public struct CITCardsCarouselView<Content> : View where Content : View {
     @Environment(\.presentationMode) var presentationMode
     
@@ -50,9 +52,16 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
         (CGFloat(pageCount) / 2.0) - 0.5
     }
     
+    
+    /// Initialise the CITCardsCarouselView.
+    /// - Parameters:
+    ///   - selection: Currently visible card index, defaults to `0`, will be updated on interaction and can be set manually.
+    ///   - pageCount: The total amount of pages / cards. The component can be used like a TabView, but as it is fiendishly hard to extract a view count from a ViewBuilder like Apple does, we request developers to manually provide the amount. Unexpected behavior will likely occur if the given page count is inaccurate.
+    ///   - config: The configuration of the CITCardsCarouselView, used to customise the visuals and interaction. Try `.example` for a simple config.
+    ///   - content: The content you wish to show as cards. Use `.tag(..)` on each card to ensure selection is updated correctly.
     public init(
         selection: Binding<Int>,
-        pageCount: Int, // As it is fiendishly hard to extract a view count from a ViewBuilder like Apple does, we can request developers to manually provide the amount.
+        pageCount: Int,
         config: CITCardsCarouselConfiguration,
         @ViewBuilder content: @escaping () -> Content
     ) {
