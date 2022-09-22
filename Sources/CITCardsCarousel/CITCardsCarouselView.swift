@@ -52,7 +52,6 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
         (CGFloat(pageCount) / 2.0) - 0.5
     }
     
-    
     /// Initialise the CITCardsCarouselView.
     /// - Parameters:
     ///   - selection: Currently visible card index, defaults to `0`, will be updated on interaction and can be set manually.
