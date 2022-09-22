@@ -41,8 +41,8 @@ public struct CITCardsCarouselConfiguration: Equatable {
     /// The spacing between the bottom controls. Defaults to `16`.
     public var bottomControlsSpacing: CGFloat
     
-    // TODO: AR-157: Be careful for the distance between font size and icon size when switching next to finish button mode. Should we add an option for a forced height?
-//                            public var buttonSize: CGSize // Force a certain size?
+    /// The height of the navigation buttons. May be used to negate visual glitches if navigation button font size and icon size differ too much, if `nil`, defaults to intrinsic content size.
+    public var navigationButtonHeight: CGFloat?
     
     /// The padding around the navigation button content. Defaults to `init(top: 16, leading: 16, bottom: 16, trailing: 16)`.
     public var navigationButtonContentPadding: EdgeInsets
@@ -118,6 +118,7 @@ public struct CITCardsCarouselConfiguration: Equatable {
         cardIgnoreSafeAreaEdges: Edge.Set?              = nil,
         bottomControlsPadding: EdgeInsets               = .init(top: 0, leading: 24, bottom: 24, trailing: 24),
         bottomControlsSpacing: CGFloat                  = 16,
+        navigationButtonHeight: CGFloat?                = nil,
         navigationButtonContentPadding: EdgeInsets      = .init(top: 16, leading: 16, bottom: 16, trailing: 16),
         navigationButtonIconSize: CGFloat               = 20,
         navigationButtonDismissIcon: Image              = .init(systemName: "xmark"),
@@ -146,6 +147,7 @@ public struct CITCardsCarouselConfiguration: Equatable {
         self.cardIgnoreSafeAreaEdges = cardIgnoreSafeAreaEdges
         self.bottomControlsPadding = bottomControlsPadding
         self.bottomControlsSpacing = bottomControlsSpacing
+        self.navigationButtonHeight = navigationButtonHeight
         self.navigationButtonContentPadding = navigationButtonContentPadding
         self.navigationButtonIconSize = navigationButtonIconSize
         self.navigationButtonDismissIcon = navigationButtonDismissIcon

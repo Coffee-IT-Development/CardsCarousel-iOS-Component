@@ -130,6 +130,7 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
                         .frame(width: config.navigationButtonIconSize, height: config.navigationButtonIconSize)
                         .foregroundColor(config.secondaryButtonForegroundColor)
                         .padding(config.navigationButtonContentPadding)
+                        .frame(height: config.navigationButtonHeight)
                 }
                 .background(config.secondaryButtonBackgroundColor)
                 .cornerRadius(config.buttonCornerRadius)
@@ -144,6 +145,7 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
                     rightButtonContent
                         .foregroundColor(config.primaryButtonForegroundColor)
                         .padding(config.navigationButtonContentPadding)
+                        .frame(height: config.navigationButtonHeight)
                 }
                 .background(config.tintColor)
                 .cornerRadius(config.buttonCornerRadius)
