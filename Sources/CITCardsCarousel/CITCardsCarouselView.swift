@@ -45,7 +45,6 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
         selection + 1 == pageCount
     }
     
-    // TODO: Check if the base offset has negative impact if in swipeable mode.
     /// Gives the card carousel a base offset when swiping is disabled so that the first view is shown in the nonSwipeableCards view.
     private var pageBaseOffsetMultiplier: CGFloat {
         (CGFloat(pageCount) / 2.0) - 0.5
