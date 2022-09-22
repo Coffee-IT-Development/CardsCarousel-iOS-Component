@@ -89,6 +89,7 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
         }
         .background(config.backgroundColor.ignoresSafeArea())
         .animation(nilBeforeDidAppear)
+        .optionalIgnoresSafeArea(edges: config.cardIgnoreSafeAreaEdges)
     }
     
     private var swipeableCards: some View {
@@ -96,6 +97,7 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
             content()
                 .cornerRadius(config.cardCornerRadius)
                 .padding(config.cardPadding)
+                .optionalIgnoresSafeArea(edges: config.cardIgnoreSafeAreaEdges)
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
     }
@@ -107,6 +109,7 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
                 .padding(config.cardPadding)
                 .frame(width: viewSize.width)
                 .offset(x: viewSize.width * pageBaseOffsetMultiplier - CGFloat(selection) * viewSize.width)
+                .optionalIgnoresSafeArea(edges: config.cardIgnoreSafeAreaEdges)
         }
         .frame(width: viewSize.width * CGFloat(pageCount))
     }

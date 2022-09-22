@@ -32,6 +32,9 @@ public struct CITCardsCarouselConfiguration: Equatable {
     /// The padding around the card container. Defaults to `.init(top: 24, leading: 24, bottom: 32, trailing: 24)`.
     public var cardPadding: EdgeInsets
     
+    /// The safe area edges that a card ignores. Can be set to `.top` to allow a card to affect status bar area (i.e. let an image or color reach the top of the screen). Defaults to `nil`.
+    public var cardIgnoreSafeAreaEdges: Edge.Set?
+    
     /// The padding around the bottom controls. Defaults to `.init(top: 0, leading: 24, bottom: 24, trailing: 24)`.
     public var bottomControlsPadding: EdgeInsets
     
@@ -112,6 +115,7 @@ public struct CITCardsCarouselConfiguration: Equatable {
     
     public init(
         cardPadding: EdgeInsets                         = .init(top: 24, leading: 24, bottom: 32, trailing: 24),
+        cardIgnoreSafeAreaEdges: Edge.Set?              = nil,
         bottomControlsPadding: EdgeInsets               = .init(top: 0, leading: 24, bottom: 24, trailing: 24),
         bottomControlsSpacing: CGFloat                  = 16,
         navigationButtonContentPadding: EdgeInsets      = .init(top: 16, leading: 16, bottom: 16, trailing: 16),
@@ -139,6 +143,7 @@ public struct CITCardsCarouselConfiguration: Equatable {
         indicatorSize: CGFloat                          = 6
     ) {
         self.cardPadding = cardPadding
+        self.cardIgnoreSafeAreaEdges = cardIgnoreSafeAreaEdges
         self.bottomControlsPadding = bottomControlsPadding
         self.bottomControlsSpacing = bottomControlsSpacing
         self.navigationButtonContentPadding = navigationButtonContentPadding
