@@ -189,10 +189,33 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
     }
 }
 
-// TODO: Add good preview for Cards Carousel
-//
-//struct CITCardsCarouselView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CITCardsCarouselView()
-//    }
-//}
+
+struct CITCardsCarouselView_Previews: PreviewProvider {
+    static var previews: some View {
+        CITCardCarouselPreview()
+    }
+    
+    struct CITCardCarouselPreview: View {
+        @State private var selectedTab: Int = 0
+        private let coloredExample = CITCardsCarouselConfiguration(
+            tintColor: Color(#colorLiteral(red: 0.9433208704, green: 0.9532698989, blue: 0.9745958447, alpha: 1)),
+            backgroundColor: Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)),
+            primaryButtonForegroundColor: Color(#colorLiteral(red: 0.3045416772, green: 0.4229111373, blue: 0.8595631719, alpha: 1))
+        )
+        
+        var body: some View {
+            CITCardsCarouselView(selection: $selectedTab, pageCount: 3, config: coloredExample) {
+                card("A").tag(0)
+                card("B").tag(1)
+                card("C").tag(2)
+            }
+        }
+        
+        private func card(_ name: String) -> some View {
+            ZStack {
+                Color(white: 0.95)
+                Text(name)
+            }
+        }
+    }
+}
