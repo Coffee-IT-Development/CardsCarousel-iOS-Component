@@ -36,8 +36,11 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
     private var config: CITCardsCarouselConfiguration
     private var content: () -> Content
     
+    /// The view size is determined onAppear.
+    /// To avoid visual glitches in the nonSwipeableCards during appear, we set the overall carousel animation to nil.
+    /// The animation is then restored 1 frame after onAppear, this way, there are no visual glitches and the carousel is still animated.
     @State private var viewSize: CGSize = .zero
-    @State private var nilBeforeDidAppear: Animation? = nil
+    @State private var carouselAnimation: Animation? = nil
     
     private var isOnFirstPage: Bool {
         selection == 0
@@ -86,7 +89,7 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
                             .onAppear {
                                 self.viewSize = proxy.size
                                 DispatchQueue.main.async {
-                                    self.nilBeforeDidAppear = .default
+                                    self.carouselAnimation = config.carouselAnimation
                                 }
                             }
                             .onChange(of: proxy.size) { newValue in
@@ -96,7 +99,7 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
             }
         }
         .background(config.backgroundColor.ignoresSafeArea())
-        .animation(nilBeforeDidAppear)
+        .animation(carouselAnimation)
         .optionalIgnoresSafeArea(edges: config.cardIgnoreSafeAreaEdges)
     }
     

@@ -113,6 +113,9 @@ public struct CITCardsCarouselConfiguration: Equatable {
     /// The size of each indicator, determines both width and height of circle. Defaults to `6`.
     public var indicatorSize: CGFloat
     
+    /// The animation of the entire carousel. Defaults to `.default`, but replaced with `nil` during onAppear to prevent visual glitches in `nonSwipeableCards`.
+    public var carouselAnimation: Animation?
+    
     public init(
         cardPadding: EdgeInsets                         = .init(top: 24, leading: 24, bottom: 32, trailing: 24),
         cardIgnoreSafeAreaEdges: Edge.Set?              = nil,
@@ -141,7 +144,8 @@ public struct CITCardsCarouselConfiguration: Equatable {
         buttonCornerRadius: CGFloat                     = 16,
         indicatorCornerRadius: CGFloat                  = .infinity,
         indicatorSpacing: CGFloat                       = 6,
-        indicatorSize: CGFloat                          = 6
+        indicatorSize: CGFloat                          = 6,
+        carouselAnimation: Animation?                   = .default
     ) {
         self.cardPadding = cardPadding
         self.cardIgnoreSafeAreaEdges = cardIgnoreSafeAreaEdges
@@ -171,6 +175,7 @@ public struct CITCardsCarouselConfiguration: Equatable {
         self.indicatorCornerRadius = indicatorCornerRadius
         self.indicatorSpacing = indicatorSpacing
         self.indicatorSize = indicatorSize
+        self.carouselAnimation = carouselAnimation
     }
     
     public static var example = CITCardsCarouselConfiguration()

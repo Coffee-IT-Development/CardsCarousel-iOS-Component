@@ -177,6 +177,9 @@ public var indicatorSpacing: CGFloat
 
 /// The size of each indicator, determines both width and height of circle. Defaults to `6`.
 public var indicatorSize: CGFloat
+
+/// The animation of the entire carousel. Defaults to `.default`, but replaced with `nil` during onAppear to prevent visual glitches in `nonSwipeableCards`.
+public var carouselAnimation: Animation?
 ```
 
 ## Contact
