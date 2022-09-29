@@ -26,6 +26,8 @@
 
 import SwiftUI
 
+/// The CITCardsCarousel package provides a configurable arrangement of swipe-able card views which can be used for tutorials and other flows.
+/// Includes page indicators, skip, previous, next and finish buttons.
 public struct CITCardsCarouselView<Content> : View where Content : View {
     @Environment(\.presentationMode) var presentationMode
     
@@ -34,8 +36,11 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
     private var config: CITCardsCarouselConfiguration
     private var content: () -> Content
     
-    // FIXME: AR-149: (Resolve in open source ticket) Update offset if selection binding changes instead of only on button press.
-    @State private var offset: CGFloat
+    /// The view size is determined onAppear.
+    /// To avoid visual glitches in the nonSwipeableCards during appear, we set the overall carousel animation to nil.
+    /// The animation is then restored 1 frame after onAppear, this way, there are no visual glitches and the carousel is still animated.
+    @State private var viewSize: CGSize = .zero
+    @State private var carouselAnimation: Animation? = nil
     
     private var isOnFirstPage: Bool {
         selection == 0
@@ -45,15 +50,20 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
         selection + 1 == pageCount
     }
     
-    // TODO: Check if the base offset has negative impact if in swipeable mode.
     /// Gives the card carousel a base offset when swiping is disabled so that the first view is shown in the nonSwipeableCards view.
     private var pageBaseOffsetMultiplier: CGFloat {
         (CGFloat(pageCount) / 2.0) - 0.5
     }
     
+    /// Initialise the CITCardsCarouselView.
+    /// - Parameters:
+    ///   - selection: Currently visible card index, defaults to `0`, will be updated on interaction and can be set manually.
+    ///   - pageCount: The total amount of pages / cards. The component can be used like a TabView, but as it is fiendishly hard to extract a view count from a ViewBuilder like Apple does, we request developers to manually provide the amount. Unexpected behavior will likely occur if the given page count is inaccurate.
+    ///   - config: The configuration of the CITCardsCarouselView, used to customise the visuals and interaction. Try `.example` for a simple config.
+    ///   - content: The content you wish to show as cards. Use `.tag(..)` on each card to ensure selection is updated correctly.
     public init(
         selection: Binding<Int>,
-        pageCount: Int, // As it is fiendishly hard to extract a view count from a ViewBuilder like Apple does, we can request developers to manually provide the amount.
+        pageCount: Int,
         config: CITCardsCarouselConfiguration,
         @ViewBuilder content: @escaping () -> Content
     ) {
@@ -61,7 +71,6 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
         self.pageCount = pageCount
         self.config = config
         self.content = content
-        self._offset = State(initialValue: CGFloat(pageCount - 1) * UIScreen.main.bounds.width)
     }
     
     public var body: some View {
@@ -75,10 +84,23 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
             if config.showNavigationButtons || config.showIndicators {
                 bottomControls
                     .padding(config.bottomControlsPadding)
+                    .background(GeometryReader { proxy in
+                        Color.clear
+                            .onAppear {
+                                self.viewSize = proxy.size
+                                DispatchQueue.main.async {
+                                    self.carouselAnimation = config.carouselAnimation
+                                }
+                            }
+                            .onChange(of: proxy.size) { newValue in
+                                self.viewSize = newValue
+                            }
+                    })
             }
         }
         .background(config.backgroundColor.ignoresSafeArea())
-        .animation(.default)
+        .animation(carouselAnimation)
+        .optionalIgnoresSafeArea(edges: config.cardIgnoreSafeAreaEdges)
     }
     
     private var swipeableCards: some View {
@@ -86,20 +108,21 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
             content()
                 .cornerRadius(config.cardCornerRadius)
                 .padding(config.cardPadding)
+                .optionalIgnoresSafeArea(edges: config.cardIgnoreSafeAreaEdges)
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
     }
     
-    // TODO: Resolve UIScreen.main.bounds.width usage to be compatible with smaller sizes if desired.
     private var nonSwipeableCards: some View {
         HStack(spacing: 0) {
             content()
                 .cornerRadius(config.cardCornerRadius)
                 .padding(config.cardPadding)
-                .frame(width: UIScreen.main.bounds.width)
-                .offset(x: -UIScreen.main.bounds.width * pageBaseOffsetMultiplier + offset)
+                .frame(width: viewSize.width)
+                .offset(x: viewSize.width * pageBaseOffsetMultiplier - CGFloat(selection) * viewSize.width)
+                .optionalIgnoresSafeArea(edges: config.cardIgnoreSafeAreaEdges)
         }
-        .frame(width: UIScreen.main.bounds.width * CGFloat(pageCount))
+        .frame(width: viewSize.width * CGFloat(pageCount))
     }
     
     private var bottomControls: some View {
@@ -110,6 +133,7 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
                         .frame(width: config.navigationButtonIconSize, height: config.navigationButtonIconSize)
                         .foregroundColor(config.secondaryButtonForegroundColor)
                         .padding(config.navigationButtonContentPadding)
+                        .frame(height: config.navigationButtonHeight)
                 }
                 .background(config.secondaryButtonBackgroundColor)
                 .cornerRadius(config.buttonCornerRadius)
@@ -124,6 +148,7 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
                     rightButtonContent
                         .foregroundColor(config.primaryButtonForegroundColor)
                         .padding(config.navigationButtonContentPadding)
+                        .frame(height: config.navigationButtonHeight)
                 }
                 .background(config.tintColor)
                 .cornerRadius(config.buttonCornerRadius)
@@ -157,7 +182,6 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
             dismiss()
         } else {
             withAnimation {
-                offset += UIScreen.main.bounds.width
                 selection -= 1
             }
         }
@@ -168,7 +192,6 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
             dismiss()
         } else {
             withAnimation {
-                offset -= UIScreen.main.bounds.width
                 selection += 1
             }
         }
@@ -179,10 +202,33 @@ public struct CITCardsCarouselView<Content> : View where Content : View {
     }
 }
 
-// TODO: Add good preview for Cards Carousel
-//
-//struct CITCardsCarouselView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CITCardsCarouselView()
-//    }
-//}
+
+struct CITCardsCarouselView_Previews: PreviewProvider {
+    static var previews: some View {
+        CITCardCarouselPreview()
+    }
+    
+    struct CITCardCarouselPreview: View {
+        @State private var selectedTab: Int = 0
+        private let coloredExample = CITCardsCarouselConfiguration(
+            tintColor: Color(#colorLiteral(red: 0.9433208704, green: 0.9532698989, blue: 0.9745958447, alpha: 1)),
+            backgroundColor: Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)),
+            primaryButtonForegroundColor: Color(#colorLiteral(red: 0.3045416772, green: 0.4229111373, blue: 0.8595631719, alpha: 1))
+        )
+        
+        var body: some View {
+            CITCardsCarouselView(selection: $selectedTab, pageCount: 3, config: coloredExample) {
+                card("A").tag(0)
+                card("B").tag(1)
+                card("C").tag(2)
+            }
+        }
+        
+        private func card(_ name: String) -> some View {
+            ZStack {
+                Color(white: 0.95)
+                Text(name)
+            }
+        }
+    }
+}

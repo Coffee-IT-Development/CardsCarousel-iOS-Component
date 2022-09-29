@@ -32,28 +32,31 @@ public struct CITCardsCarouselConfiguration: Equatable {
     /// The padding around the card container. Defaults to `.init(top: 24, leading: 24, bottom: 32, trailing: 24)`.
     public var cardPadding: EdgeInsets
     
+    /// The safe area edges that a card ignores. Can be set to `.top` to allow a card to affect status bar area (i.e. let an image or color reach the top of the screen). Defaults to `nil`.
+    public var cardIgnoreSafeAreaEdges: Edge.Set?
+    
     /// The padding around the bottom controls. Defaults to `.init(top: 0, leading: 24, bottom: 24, trailing: 24)`.
     public var bottomControlsPadding: EdgeInsets
     
     /// The spacing between the bottom controls. Defaults to `16`.
     public var bottomControlsSpacing: CGFloat
     
-    // TODO: AR-157: Be careful for the distance between font size and icon size when switching next to finish button mode. Should we add an option for a forced height?
-//                            public var buttonSize: CGSize // Force a certain size?
+    /// The height of the navigation buttons. May be used to negate visual glitches if navigation button font size and icon size differ too much, if `nil`, defaults to intrinsic content size.
+    public var navigationButtonHeight: CGFloat?
     
     /// The padding around the navigation button content. Defaults to `init(top: 16, leading: 16, bottom: 16, trailing: 16)`.
     public var navigationButtonContentPadding: EdgeInsets
     
-    /// The squared size of navigation button icons, i.e. 􀆄, 􀄪 and 􀄫. Defaults to `20`.
+    /// The squared size of navigation button icons, i.e. `xmark`, `arrow.left` and `arrow.right`. Defaults to `20`.
     public var navigationButtonIconSize: CGFloat
     
-    /// The dismiss icon used in the navigation buttons. Defaults to `􀆄`.
+    /// The dismiss icon used in the navigation buttons. Defaults to `xmark`.
     public var navigationButtonDismissIcon: Image
     
-    /// The previous icon used in the navigation buttons. Defaults to `􀄪`.
+    /// The previous icon used in the navigation buttons. Defaults to `arrow.left`.
     public var navigationButtonPreviousIcon: Image
     
-    /// The next icon used in the navigation buttons. Defaults to `􀄫`.
+    /// The next icon used in the navigation buttons. Defaults to `arrow.right`.
     public var navigationButtonNextIcon: Image
     
     /// The finish text used in the right navigation button on the last page. Defaults to `Let's start`.
@@ -110,10 +113,15 @@ public struct CITCardsCarouselConfiguration: Equatable {
     /// The size of each indicator, determines both width and height of circle. Defaults to `6`.
     public var indicatorSize: CGFloat
     
+    /// The animation of the entire carousel. Defaults to `.default`, but replaced with `nil` during onAppear to prevent visual glitches in `nonSwipeableCards`.
+    public var carouselAnimation: Animation?
+    
     public init(
         cardPadding: EdgeInsets                         = .init(top: 24, leading: 24, bottom: 32, trailing: 24),
+        cardIgnoreSafeAreaEdges: Edge.Set?              = nil,
         bottomControlsPadding: EdgeInsets               = .init(top: 0, leading: 24, bottom: 24, trailing: 24),
         bottomControlsSpacing: CGFloat                  = 16,
+        navigationButtonHeight: CGFloat?                = nil,
         navigationButtonContentPadding: EdgeInsets      = .init(top: 16, leading: 16, bottom: 16, trailing: 16),
         navigationButtonIconSize: CGFloat               = 20,
         navigationButtonDismissIcon: Image              = .init(systemName: "xmark"),
@@ -136,11 +144,14 @@ public struct CITCardsCarouselConfiguration: Equatable {
         buttonCornerRadius: CGFloat                     = 16,
         indicatorCornerRadius: CGFloat                  = .infinity,
         indicatorSpacing: CGFloat                       = 6,
-        indicatorSize: CGFloat                          = 6
+        indicatorSize: CGFloat                          = 6,
+        carouselAnimation: Animation?                   = .default
     ) {
         self.cardPadding = cardPadding
+        self.cardIgnoreSafeAreaEdges = cardIgnoreSafeAreaEdges
         self.bottomControlsPadding = bottomControlsPadding
         self.bottomControlsSpacing = bottomControlsSpacing
+        self.navigationButtonHeight = navigationButtonHeight
         self.navigationButtonContentPadding = navigationButtonContentPadding
         self.navigationButtonIconSize = navigationButtonIconSize
         self.navigationButtonDismissIcon = navigationButtonDismissIcon
@@ -164,6 +175,7 @@ public struct CITCardsCarouselConfiguration: Equatable {
         self.indicatorCornerRadius = indicatorCornerRadius
         self.indicatorSpacing = indicatorSpacing
         self.indicatorSize = indicatorSize
+        self.carouselAnimation = carouselAnimation
     }
     
     public static var example = CITCardsCarouselConfiguration()
