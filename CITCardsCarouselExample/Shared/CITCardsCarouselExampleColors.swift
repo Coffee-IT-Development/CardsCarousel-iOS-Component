@@ -24,8 +24,6 @@
 //  SOFTWARE.
 //
 
-import Foundation
-
 import SwiftUI
 
 extension UIColor {
@@ -39,5 +37,3 @@ extension Color {
     static let carouselButtonTextColor = Color(.carouselButtonTextColor)
     static let coffeeItColor = Color(.coffeeItColor)
 }
-
-
