@@ -13,6 +13,10 @@
 The CITCardsCarousel package provides a configurable arrangement of swipe-able card views which can be used for tutorials and other flows.
 Includes page indicators, skip, previous, next and finish buttons.
 
+<p>
+    <img src="Docs/Images/cards-carousel.gif" width="300">
+</p>
+
 ## Installation
 
 ### SwiftPM
