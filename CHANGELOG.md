@@ -3,10 +3,14 @@ All notable changes to this project will be documented in this file.
 `CITCardsCarousel` adheres to [Semantic Versioning](https://semver.org/).
 
 #### 1.x Releases
-- `1.0.x` Releases - [1.0.0](#100)
+- `1.0.x` Releases - [1.0.0](#100) | [1.0.1](#101)
 
 #### 0.x Releases
 - `0.1.x` Releases - [0.1.0](#010)
+
+#### 1.0.1
+
+- Updated README to new standard.
 
 #### 1.0.0
 
