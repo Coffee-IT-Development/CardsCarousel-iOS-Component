@@ -13,20 +13,20 @@
 The CITCardsCarousel package provides a configurable arrangement of swipe-able card views which can be used for tutorials and other flows.
 Includes page indicators, skip, previous, next and finish buttons.
 
-<p>
+<p float="left">
     <img src="Docs/Images/cards-carousel.gif" width="300">
 </p>
 
-## Installation
+## ⚡ Installation
 
-### SwiftPM
+### 🔨 SwiftPM
 
 To install the Swift Package, go to Project > Package Dependencies > + > Search or Enter Package URL > Fill in:
 ```
 https://github.com/Coffee-IT-Development/CardsCarousel-iOS-Component
 ```
 
-## Usage
+## 📖 Usage
 
 Import CITCardsCarousel and add a CITCardsCarouselView to your SwiftUI view.
 The following example showcases how you could use the cards carousel in a sheet or fullScreenCover.
@@ -93,7 +93,7 @@ struct CITCardsCarouselExampleView: View {
 }
 ```
 
-## Customization
+## ⚙️ Customization
 
 ```swift
 /// The padding around the card container. Defaults to `.init(top: 24, leading: 24, bottom: 32, trailing: 24)`.
@@ -184,23 +184,19 @@ public var indicatorSize: CGFloat
 public var carouselAnimation: Animation?
 ```
 
-## Contact
+## 🔗 Related publications
 
-For questions, ideas or help you can reach us by email at contact@coffeeit.nl.
+Look at our other repositories on our [GitHub account](https://github.com/orgs/Coffee-IT-Development/repositories).
 
 ## ✏️ Changelog
 
 All notable changes to this project will be documented in the [Changelog](CHANGELOG.md).
 `CITCardsCarousel` adheres to [Semantic Versioning](https://semver.org/).
 
-## Maintainer
+## 📧 Contact
 
-Owned and actively maintained by [Coffee IT](https://coffeeit.nl/).
+For questions, ideas or help you can reach us by email at contact@coffeeit.nl.
 
-## More
-
-Look at our other repositories on our [GitHub account](https://github.com/orgs/Coffee-IT-Development/repositories).
-
-## License
+## ⚠️ License
 
 Distributed under the MIT License. [See LICENSE](LICENSE.md) for more information.
