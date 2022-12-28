@@ -199,4 +199,4 @@ For questions, ideas or help you can reach us by email at contact@coffeeit.nl.
 
 ## ⚠️ License
 
-Distributed under the MIT License. [See LICENSE](LICENSE.md) for more information.
+The Aroma CardsCarousel package is licensed under the terms of the [MIT Open Source license, combined with the Commons Clause licence](LICENSE.md).
